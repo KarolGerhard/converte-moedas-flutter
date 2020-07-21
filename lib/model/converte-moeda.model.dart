@@ -1,13 +1,13 @@
 import 'dart:convert';
 
-class ConverteAiModel{
+class ConverteMoedaModel{
   String base;
   Map<String, double> rates;
   String date;
 
-  ConverteAiModel({this.base, this.date, this.rates});
+  ConverteMoedaModel({this.base, this.date, this.rates});
 
-  ConverteAiModel.fromJson(Map<String, dynamic> json){
+  ConverteMoedaModel.fromJson(Map<String, dynamic> json){
     base = json['base'];
     rates = json['rates'].cast<String, double>();
     date = json['date'];

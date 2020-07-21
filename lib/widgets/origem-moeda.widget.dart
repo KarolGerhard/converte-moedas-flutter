@@ -1,52 +1,39 @@
-import 'package:conversao_moedas/components/button-tipo-moeda.widget.dart';
+import 'package:conversao_moedas/components/dropdown-button-tipo-moeda.widget.dart';
 import 'package:conversao_moedas/controllers/converte-moeda.controller.dart';
 import 'package:conversao_moedas/stores/app.store.dart';
 import 'package:conversao_moedas/widgets/input.widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_masked_text/flutter_masked_text.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
 
 class OriginCoin extends StatelessWidget {
- TextEditingController origemCtrl;
- ConverteMoedaController controller;
-//  Function alteraValor;
-//  Function alteraOrigem;
+  var origemCtrl =  new MoneyMaskedTextController();
+  final ConverteMoedaController controller;
 
- 
- OriginCoin({
-   @required this.origemCtrl,
-  //  this.alteraValor,
-  //  this.alteraOrigem,
-  @required this.controller
- });
-
+  OriginCoin({@required this.origemCtrl, @required this.controller});
 
   @override
   Widget build(BuildContext context) {
     final store = Provider.of<AppStore>(context);
-   // final controller = new ConverteMoedaController(store);
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         Expanded(
-            child: Observer(
-            builder: (_) => 
-            CVButtonMoeda(
+          child: Observer(
+            builder: (_) => CMDButtonMoeda(
               alteraValorButton: controller.alteraOrigem,
-              value: "EUR",
+              value: controller.origem,
               onChanged: store.atualizaOrigem,
-              
             ),
           ),
         ),
-
         Expanded(
-          child: Observer(builder: (_) =>
-            Input(
-              ctrl: origemCtrl, 
+          child: Observer(
+            builder: (_) => Input(
+              ctrl: origemCtrl,
               alteraValor: controller.alteraValor,
-              
             ),
           ),
         ),

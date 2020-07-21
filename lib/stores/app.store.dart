@@ -1,16 +1,14 @@
 import 'package:mobx/mobx.dart';
 part 'app.store.g.dart';
 
-
 class AppStore = _AppStore with _$AppStore;
 
 abstract class _AppStore with Store {
-  
   @observable
-  String origem = "EUR";
+  String origem;
 
   @observable
-  String destino = "EUR";
+  String destino;
 
   @observable
   double valorConvertido = 0.00;
@@ -18,21 +16,24 @@ abstract class _AppStore with Store {
   @observable
   bool busy = false;
 
+
   @action
-  void atualizaValor(double state){
+  void atualizaValorBusy(bool state) {
+    busy = state;
+  }
+
+  @action
+  void atualizaValor(double state) {
     valorConvertido = state;
   }
 
   @action
-  void atualizaOrigem(String valorOrigem){
+  void atualizaOrigem(String valorOrigem) {
     origem = valorOrigem;
   }
 
   @action
-  void atualizaDestino(String valorDestino){
-    origem = valorDestino;
+  void atualizaDestino(String valorDestino) {
+    destino = valorDestino;
   }
-
-
-
 }

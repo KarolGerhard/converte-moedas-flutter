@@ -1,41 +1,46 @@
 import 'package:conversao_moedas/service/converte-moeda.service.dart';
 import 'package:conversao_moedas/stores/app.store.dart';
 
-class ConverteMoedaController{
+class ConverteMoedaController {
   AppStore _store;
-  ConverteMoedaService _service =  new ConverteMoedaService();
+  ConverteMoedaService _service = new ConverteMoedaService();
   double valor;
-  String origem;
-  String destino;
+  String origem = "EUR";
+  String destino = "USD";
 
-  ConverteMoedaController(AppStore store){
+  ConverteMoedaController(AppStore store) {
     _store = store;
   }
 
   Future calcularValorMoeda() async {
-    if(valor != null && origem != null && destino != null){
+    if (valor != null && origem != null && destino != null) {
       _store.busy = true;
       var resultado = await _service.calcule(origem, destino, valor);
+      _store.busy = false;
       _store.atualizaValor(resultado);
-     print("resultado: ${resultado}");
     }
   }
 
-  Future alteraOrigem(String origem) async{
+  Future alteraOrigem(String origem) async {
+    _store.busy = true;
     this.origem = origem;
-     print("origem: ${origem}");
     await calcularValorMoeda();
-  } 
-
-  Future alteraDestino(String destino) async {
-    this.destino = destino;
-    print("Destino: ${destino}");
-    await calcularValorMoeda();
+    _store.busy = false;
   }
 
-  Future alteraValor(double valor) async{
-    this.valor = valor;
-    print("valor: ${valor}");
+  Future alteraDestino(String destino) async {
+    _store.busy = true;
+    this.destino = destino;
     await calcularValorMoeda();
-  } 
+    _store.busy = false;
+
+  }
+
+  Future alteraValor(double valor) async {
+    _store.busy = true;
+    this.valor = valor;
+    await calcularValorMoeda();
+    _store.busy = false;
+
+  }
 }

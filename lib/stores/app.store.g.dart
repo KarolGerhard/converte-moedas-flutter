@@ -80,6 +80,16 @@ mixin _$AppStore on _AppStore, Store {
   final _$_AppStoreActionController = ActionController(name: '_AppStore');
 
   @override
+  void atualizaValorBusy(bool state) {
+    final _$actionInfo = _$_AppStoreActionController.startAction();
+    try {
+      return super.atualizaValorBusy(state);
+    } finally {
+      _$_AppStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void atualizaValor(double state) {
     final _$actionInfo = _$_AppStoreActionController.startAction();
     try {

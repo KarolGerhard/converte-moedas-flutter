@@ -6,28 +6,13 @@ class Logo extends StatelessWidget {
     return Column(
       children: <Widget>[
         SizedBox(
-          height:60,
+          height: 40,
         ),
         Container(
           child: Image.asset(
-            "assets/images/logo-teste.png",
-            height: 100,
-          ), 
-        ),
-        SizedBox(
-          height: 10,
-        ), 
-        Text(
-         "Currency",
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 25,
-            //fontFamily: Thema
+            "assets/images/logo.png",
+            width: MediaQuery.of(context).size.width * 0.65,
           ),
-          textAlign: TextAlign.center,
-        ),
-        SizedBox(
-          height: 20,
         ),
       ],
     );

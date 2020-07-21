@@ -15,10 +15,11 @@ class CMBusy extends StatelessWidget {
     return busy
       ? Container(
         child: Center(
-          child: CircularProgressIndicator(),
+          child: CircularProgressIndicator(
+            backgroundColor: Colors.indigo,
+          ),
         )
       )
       :child;
-   
   }
 }
